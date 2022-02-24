@@ -1,0 +1,33 @@
+<div id="inputs">
+  <input type="text" name="" [(ngModel)]="nuevatarea" (keyup.enter)="add()" placeholder="Añadir tarea"> 
+  <button (click)="add()">Add!</button>
+  <input type="text" [(ngModel)]="busqueda" (keyup)="buscar()" placeholder="Buscar..">
+</div>
+
+<h1  *ngIf="mistareas.length">Lista de tareas</h1>
+
+<h1>{{mistareas}}</h1>
+
+<table >
+  <tr *ngFor="let tarea of tareasmodificar; index as index" [class]="{hecha:tarea.hecha}">
+    <td>
+      <ul (click)="hacer(index)">
+        {{index+1}}
+        -{{tarea.nombre}}
+        <li>Prioridad: {{tarea.prioridad == 0 ? "Alta":tarea.prioridad == 1 ? "Media":"Baja"}}  </li> 
+        <li>Fecha: {{tarea.fecha}}</li>
+        <li>Hecha: {{tarea.hecha}}</li>
+        <li>Creada hace: {{calculaDiferencia(index)}} minutos</li>
+      </ul>  
+    </td>
+    <td> 
+      <button (click)="borra(index)">Borrar tarea</button> 
+      <button (click)="prioridadAlta(index)">Alta</button> 
+      <button (click)="prioridadMedia(index)">Media</button>
+      <button (click)="prioridadBaja(index)">Baja</button>
+    </td>
+  </tr>
+</table>
+<button (click)="mostrarTodas()">All</button>
+<button (click)="mostrarTerminadas()">Completed</button>
+<button (click)="mostrarSinTerminar()">Active</button>
